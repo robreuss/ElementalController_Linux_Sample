@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Socket",
+        "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
+        "state": {
+          "branch": null,
+          "revision": "a40b405bdf32bc853307dd5dee8d00636e394013",
+          "version": "1.0.44"
+        }
+      },
+      {
+        "package": "Cdns_sd",
+        "repositoryURL": "https://github.com/Bouke/Cdns_sd.git",
+        "state": {
+          "branch": null,
+          "revision": "3fcf5956ede714baae95cbf530e90ef3439451c9",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "ElementalController",
+        "repositoryURL": "https://github.com/robreuss/ElementalController.git",
+        "state": {
+          "branch": "develop",
+          "revision": "f266b59d89c5e20b6ef399599e4517f1d99883de",
+          "version": null
+        }
+      },
+      {
+        "package": "NetService",
+        "repositoryURL": "https://github.com/Bouke/NetService.git",
+        "state": {
+          "branch": null,
+          "revision": "7181540cd87f59efacba3e5b3ef0c3b27d54f309",
+          "version": "0.5.0"
+        }
+      },
+      {
+        "package": "SwiftPM",
+        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
+        "state": {
+          "branch": null,
+          "revision": "235aacc514cb81a6881364b0fedcb3dd083228f3",
+          "version": "0.3.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
