@@ -1,4 +1,4 @@
-# ElementController Linux Sample
+# ElementController Linux and macOS Sample
 
 Overview
 
