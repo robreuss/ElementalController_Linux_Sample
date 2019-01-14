@@ -51,11 +51,11 @@ class Main {
         
         // For each device that connects, add elements and handlers
         self.elementalController.service.events.deviceConnected.handler = { _, device in
-        
+            
             // Keep track of these
             let clientDevice = device as! ClientDevice
             self.clientDevices.append(clientDevice)
-        
+            
             // Attach elements to the client device.  Note, it's possible to publish more than one service, and have
             // different sets of elements, as well it is possible to have different sets of elements on
             // a client device basis (if you should so need for some unknown use case)
@@ -68,31 +68,31 @@ class Main {
             let elementMotionY = clientDevice.attachElement(Element(identifier: eid_motionY, displayName: "Motion Y", proto: .udp, dataType: .Double))
             let elementMotionZ = clientDevice.attachElement(Element(identifier: eid_motionZ, displayName: "Motion Z", proto: .udp, dataType: .Double))
             
-            // What we do when each element arrives
-            elementForward.handler = { element, device in
-            logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
-            }
-            elementBackward.handler = { element, device in
-            logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
-            }
-            elementRight.handler = { element, device in
-            logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
-            }
-            elementLeft.handler = { element, device in
+            // Define our handler one time and apply it to muliple elements
+            let directionHandler: Element.ElementHandler = { element, device in
                 logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
             }
-            elementSpeed.handler = { element, device in
-                logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
+            // Actions taken on incoming elements
+            elementForward.handler = directionHandler
+            elementBackward.handler = directionHandler
+            elementRight.handler = directionHandler
+            elementLeft.handler = directionHandler
+            elementSpeed.handler = directionHandler
+            
+            // Rounded motion values.  If these needed to be received as a tuple, they could
+            // be serialized into a Data data-type element on the client-side and deserialized
+            // here.
+            let rounding = 1000.0
+            
+            // Handler common to all three axis
+            let motionHandler: Element.ElementHandler = { element, device in
+                var value = ((element.value as! Double) * rounding).rounded() / rounding
+                logDebug("\(element.displayName): \(value)")
             }
-            elementMotionX.handler = { element, device in
-                logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
-            }
-            elementMotionY.handler = { element, device in
-                logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
-            }
-            elementMotionZ.handler = { element, device in
-                logDebug("\(element.displayName): \(element.value ?? "Unknown Value")")
-            }
+            elementMotionX.handler = motionHandler
+            elementMotionY.handler = motionHandler
+            elementMotionZ.handler = motionHandler
+            
             self.elementalController.service.events.deviceDisconnected.handler = { _, _ in
                 logDebug("Client device disconnected")
             }
