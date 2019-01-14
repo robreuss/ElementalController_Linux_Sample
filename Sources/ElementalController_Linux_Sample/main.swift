@@ -1,8 +1,10 @@
 import Foundation
 import ElementalController
 
-// Define element identifiers which are transmitted with each
-// element message to identify the eleent to the recieving end
+// Element identifiers are transmitted as a unique Int8 with each
+// element message to identify the element being sent or received.
+// All other metadata about the element (datatype, displayname, handler
+// protocol) is compiled into both sides.
 let eid_forward: Int8 = 1
 let eid_backward: Int8 = 2
 let eid_right: Int8 = 3
